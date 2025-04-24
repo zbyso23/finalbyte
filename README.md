@@ -1,12 +1,11 @@
 **Project FINALBYTE (1.2)**
 
 **Name:** FINALBYTE
-**Version:** 1.2
 **Subtitle:** Unified audio-visual expansion system for 8-bit platforms (Atari 800XL, Commodore 64, ZX Spectrum)
 
 ---
 
-### **🔧 Project Goal:**
+### 🔧 Project Goal:
 FINALBYTE is a cross-platform enhancement system for classic 8-bit computers, providing modern audio and visual capabilities while preserving full compatibility with original hardware and software.
 
 FINALBYTE delivers:
@@ -16,22 +15,22 @@ FINALBYTE delivers:
 
 ---
 
-### **🚀 Supported Platforms:**
+### 🚀 Supported Platforms:
 - Atari 800XL / 130XE
 - Commodore 64
 - ZX Spectrum (128k / AY)
 
 ---
 
-### **🌈 Architecture:**
+### 🌈 Architecture:
 
 #### ▶ FINALBYTE Module
 - External hardware (ESP32 / RPi Pico / STM32 / FPGA / RP2040)
 - Intercepts bus or I/O instructions from host system
 - Includes:
-  - 🎵 **Sound engine**: multisample, WAV, FX, stereo output
-  - 🎨 **Overlay engine**: 320x200px, 16/32 color, 4-bit alpha
-  - 📊 **Memory bank**: SD card / SPI flash for samples and graphics
+  - 🎵 Sound engine: multisample, WAV, FX, stereo output
+  - 🎨 Overlay engine: 320x200px, 16/32 color, 4-bit alpha
+  - 📊 Memory bank: SD card / SPI flash for samples and graphics
 
 #### ▶ Communication with Host System
 - Passive sniffer (listens to POKEY/SID/Beeper instructions)
@@ -42,7 +41,7 @@ FINALBYTE delivers:
 
 ---
 
-### **🆕 ✨ FINALBYTE Enhancements:**
+### 🆕 ✨ FINALBYTE Enhancements:
 
 #### 🖥️ 1. Video Overlay (Amiga-style)
 - Full overlay system:
@@ -75,7 +74,39 @@ FINALBYTE delivers:
 
 ---
 
-### **🎧 Sound Engine:**
+### 🧠 Planned Upgrades for Finalbyte Release:
+
+#### 🎵 Sound Sample Banks
+- 4 independent sample banks: 1 built-in + 3 switchable
+- `BANK 0`: Core ROM (default FX: shoot, explosion, pickup…)
+- `BANK 1–3`: User-defined banks (modpacks, game-specific, scene)
+- Switch via: `FINALBYTE_SET_SFX_BANK(n); // 0–3`
+- Samples called with: `FINALBYTE_PLAY_SAMPLE(0x12);` – playback depends on active bank
+
+#### 🎨 Sprite/Tile Graphics Banks
+- 4 switchable sets, dynamic during gameplay
+- `BANK 0`: Retro GUI, HUD, enemies
+- `BANK 1–3`: Thematic sets (dungeon, city, sci-fi)
+- Switch via: `FINALBYTE_SET_GFX_BANK(n); // 0–3`
+- Each bank includes:
+  - 16×16 and 32×32 tiles
+  - Animations, icons, HUD elements
+
+#### 🌐 Wi-Fi Connectivity (ESP32)
+- For modpack download, online play, sync
+- Auto-connect via SD `config.ini` or overlay Wi-Fi menu
+- Configuration via GUI overlay or retro console UI
+- Remote modpack fetch:
+  - Loads `gfx.bank`, `sfx.bank`, `manifest.yaml`
+  - Saves to SD and auto-activates
+- API endpoints prepared for:
+  - Version verification
+  - Bank updates
+  - Multiplayer handshake
+
+---
+
+### 🎧 Sound Engine:
 - 8/12/16-bit samples
 - Wavetable playback (velocity, pitch, offset, loop)
 - Effects: reverb, delay, filter, saturation
@@ -83,7 +114,7 @@ FINALBYTE delivers:
 
 ---
 
-### **🖼️ Overlay Engine:**
+### 🖼️ Overlay Engine:
 - 320x200px, 4-bit alpha, 16/32 color palettes ("ST" and "Amiga" modes)
 - Sprite support:
   - Positioning, Z-order, animation
@@ -93,7 +124,7 @@ FINALBYTE delivers:
 
 ---
 
-### **🧠 Collision Detection (in external system):**
+### 🧠 Collision Detection (in external system):
 - Hundreds of sprite collisions handled in real-time
 - Host system reads back collision results via buffer:
 
@@ -109,7 +140,7 @@ FINALBYTE delivers:
 
 ---
 
-### **🌐 Compatibility & Philosophy:**
+### 🌐 Compatibility & Philosophy:
 - ❌ No modification to original hardware/software
 - ✉️ All commands are non-invasive or in unused I/O ranges
 - 🏆 Games remain playable on stock machines in "Lite mode"
@@ -117,7 +148,7 @@ FINALBYTE delivers:
 
 ---
 
-### **🎮 Use Cases:**
+### 🎮 Use Cases:
 - Cross-platform remakes (Bruce Lee, Saboteur, The Last Ninja)
 - New ambient/adventure games with music and voice
 - Real-time demos (beat sync, layered effects)
@@ -125,13 +156,13 @@ FINALBYTE delivers:
 
 ---
 
-### **🏅 Status:**
+### 🏅 Status:
 - ✏️ Architecture designed
 - 📄 Address and protocol documentation in progress
 - ⚖️ Planned open-source release (HW + FW + dev libs)
 
 ---
 
-**FINALBYTE = One spirit, three legends.**  
+**FINALBYTE = One spirit, three legends.**
 Together, we bring 8-bit creativity into a new golden age.
 
