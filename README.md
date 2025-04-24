@@ -1,6 +1,7 @@
-**Project FINALBYTE**
+**Project FINALBYTE (1.2)**
 
-**Name:** FINALBYTE  
+**Name:** FINALBYTE
+**Version:** 1.2
 **Subtitle:** Unified audio-visual expansion system for 8-bit platforms (Atari 800XL, Commodore 64, ZX Spectrum)
 
 ---
