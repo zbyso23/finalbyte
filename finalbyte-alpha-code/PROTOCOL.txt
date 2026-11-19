@@ -1,0 +1,46 @@
+FINALBYTE Tech Alpha — Weekend Rev A.2 transport
+================================================
+
+C64 physical transport
+----------------------
+$DF00 write : one outgoing byte
+$DF00 read  : status byte
+
+STATUS bit 0 (READY) is generated in hardware. Every C64 write to $DF00 clears
+READY before ESP32 software is involved. ESP32 sets READY again only after it
+has copied the externally latched byte. The C64 therefore waits for READY
+before every transmitted byte.
+
+Command packet
+--------------
+Each high-level command is exactly seven bytes:
+
+    FB <command> <arg0> <arg1> <arg2> <arg3> <data>
+
+where FB = 0xFB is the packet marker.
+
+The high-level API remains fb_send(cmd, arg0, arg1, arg2, arg3, data); only the
+physical transport is serialized through the single $DF00 byte port.
+
+Video
+-----
+Framebuffer mask semantics:
+
+    0 = host C64 video
+    1 = FINALBYTE fixed-luma pixel
+
+ESP32 GPIO43 is the actual active-low SPI CS for every 256-bit row transfer.
+Rev A.1 hardware inverts CS to MASK_ACTIVE and computes:
+
+    FB_SELECT = MASK_OUT AND MASK_ACTIVE
+
+Therefore outside a real SPI row burst the analog mux is forced to original
+C64 video regardless of the last MOSI bit.
+
+Audio
+-----
+PCM5102A I2S pins:
+
+    GPIO44 = BCLK
+    GPIO47 = WS / LRCK
+    GPIO48 = DATA
